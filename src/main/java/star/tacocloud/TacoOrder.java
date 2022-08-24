@@ -1,45 +1,79 @@
 package star.tacocloud;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
-@Data
-public class TacoOrder {
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Entity
+public class TacoOrder implements Serializable {
 
-  @NotBlank(message = "Delivery name is required")
-  private String deliveryName;
+    private static final long serialVersionUUID = 1L;
 
-  @NotBlank(message = "Street is required")
-  private String deliveryStreet;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-  @NotBlank(message = "City is required")
-  private String deliveryCity;
+    private Date placedAt;
 
-  @NotBlank(message = "State is required")
-  private String deliveryState;
+    @NotBlank(message = "Delivery name is required")
+    private String deliveryName;
 
-  @NotBlank(message = "Zip code is required")
-  private String deliveryZip;
+    @NotBlank(message = "Street is required")
+    private String deliveryStreet;
 
-  @CreditCardNumber(message = "Not a valid credit card number")
-  private String ccNumber;
+    @NotBlank(message = "City is required")
+    private String deliveryCity;
 
-  @Pattern(regexp = "^(0[1-9]|1[0-2])([\\\\/])([2-9][0-9])$")
-  private String ccExpiration;
+    @NotBlank(message = "State is required")
+    private String deliveryState;
 
-  @Digits(fraction = 0, integer = 3, message = "Invalid CVV")
-  private String ccCVV;
+    @NotBlank(message = "Zip code is required")
+    private String deliveryZip;
 
-  private List<Taco> tacos = new ArrayList<>();
+    @CreditCardNumber(message = "Not a valid credit card number")
+    private String ccNumber;
 
-  public void addTaco(Taco taco) {
-    this.tacos.add((taco));
-  }
+    @Pattern(regexp = "^(0[1-9]|1[0-2])([\\\\/])([2-9][0-9])$")
+    private String ccExpiration;
+
+    @Digits(fraction = 0, integer = 3, message = "Invalid CVV")
+    private String ccCVV;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @ToString.Exclude
+    private List<Taco> tacos = new ArrayList<>();
+
+    public void addTaco(Taco taco) {
+        this.tacos.add((taco));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        TacoOrder tacoOrder = (TacoOrder) o;
+        return id != null && Objects.equals(id, tacoOrder.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
