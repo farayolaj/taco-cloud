@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<h1>Register</h1>
+<img alt="Taco Cloud Logo" src="" th:src="@{/images/TacoCloud.png}"/>
+
+<ul class="validationError"
+    th:if="${#fields.hasErrors('${registrationForm.*}')}">
+    <li th:each="error : ${#fields.errors('${registrationForm.*}')}"
+        th:text="${error}">Error
+    </li>
+</ul>
+
+<form id="registerForm" method="post" th:action="@{/register}" th:object="${registrationForm}">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text">
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password">
+
+    <label for="fullName">Full Name</label>
+    <input id="fullName" name="fullName" type="text">
+
+    <label for="street">Street</label>
+    <input id="street" name="street" type="text">
+
+    <label for="city">City</label>
+    <input id="city" name="city" type="text">
+
+    <label for="state">State</label>
+    <input id="state" name="state" type="text">
+
+    <label for="zip">Zip Code</label>
+    <input id="zip" name="zip" type="text">
+
+    <label for="phoneNumber">Phone Number</label>
+    <input id="phoneNumber" name="phoneNumber" type="text">
+
+    <button type="submit">Register</button>
+</form>
+</body>
+</html>
