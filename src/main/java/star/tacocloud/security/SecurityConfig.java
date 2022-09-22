@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .antMatchers("/", "/**").permitAll()
                 .and()
                 .formLogin().loginPage("/login")
-                .successForwardUrl("/design")
+                .defaultSuccessUrl("/design")
                 .and().build();
     }
 }
