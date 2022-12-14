@@ -31,10 +31,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeRequests()
                 .antMatchers("/design", "/orders").hasRole("USER")
+                .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/", "/**").permitAll()
                 .and()
                 .formLogin().loginPage("/login")
                 .defaultSuccessUrl("/design")
+                .and().headers()
+                .frameOptions()
+                .sameOrigin()
+                .and().csrf().ignoringAntMatchers("/h2-console/**")
                 .and().build();
     }
 }
