@@ -2,13 +2,19 @@ spring:
   datasource:
     generate-unique-name: false
     name: tacocloud
+    url: jdbc:postgres://localhost/tacocloud
+    username: tacocloud
+    password: ${env.POSTGRES_PASSWORD}
   h2:
     console:
-      enabled: true
+      enabled: false
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
+logging:
+  level:
+    tacos: WARN
 taco:
   order:
     page-size: 20

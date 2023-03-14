@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Taco Cloud | Home</title>
+    <title>Taco Cloud</title>
 </head>
 
 <body>
-<div th:replace="fragments/layout :: header (title='Welcome to Taco Cloud...')">
-</div>
+<header th:fragment="header (title)">
+    <h1 th:text="${title}">Welcome to...</h1>
+    <img alt="Taco Cloud Logo" src="" th:src="@{/images/TacoCloud.png}"/>
+</header>
 </body>
 
 </html>

@@ -2,13 +2,15 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Taco Cloud</title>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Taco Cloud | Design Tacos</title>
     <link rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 
 <body>
-<h1>Design your taco!</h1>
-<img alt="Taco Cloud Logo" src="" th:src="@{/images/TacoCloud.png}"/>
+<header th:replace="fragments/layout :: header (title='Design your Tacos')"></header>
 <form method="POST" th:object="${taco}">
     <div class="grid">
         <div class="ingredient-group" id="wraps">

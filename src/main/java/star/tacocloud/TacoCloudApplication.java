@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -23,6 +24,7 @@ public class TacoCloudApplication implements WebMvcConfigurer {
     }
 
     @Bean
+    @Profile("!prod")
     public CommandLineRunner runner(UserRepository userRepo, PasswordEncoder passwordEncoder) {
         return args -> userRepo.save(new User(
                 "farayolaj",

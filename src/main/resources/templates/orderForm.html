@@ -7,10 +7,9 @@
 </head>
 
 <body>
+<header th:replace="fragments/layout :: header (title='Order your taco creations!')"></header>
 <!--/*@thymesVar id="tacoOrder" type="star.tacocloud.TacoOrder"*/-->
 <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
-    <h1>Order your taco creations!</h1>
-    <img alt="Taco Cloud Logo" src="" th:src="@{/images/TacoCloud.png}"/>
     <h3>Your tacos in this order:</h3>
     <a id="another" th:href="@{/design}">Design another taco</a><br/>
     <ul>
